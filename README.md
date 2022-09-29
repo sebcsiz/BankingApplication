@@ -16,5 +16,14 @@ try and implement some real-life algorithms myself (such as ***Luhns Algorithm**
 - Ability to open up credit accounts => Would implement Luhns Algorithm as validity checker
 - Ability to open up mortgage based on credit score
 - Move money between accounts
-- Mini stock market (I feel like this might be too ambitious)
+- Mini stock market. Stock prices would go up or down based on randomness (I feel like this might be too ambitious)
  
+
+## User Stories
+As a user, I want to be able to be able to create multiple bank accounts
+
+As a user, I want to be able to have my account be password/pin protected
+
+As a user, I want to be able to deposit and withdraw money from my account
+
+As a user, I want to be able to close/delete a bank account
