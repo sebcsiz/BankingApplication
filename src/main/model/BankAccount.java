@@ -1,55 +1,39 @@
 package model;
 
 public class BankAccount {
-    private String name;         // Account holder's name
-    private double balance;      // Account balance
-    private int id;              // Account id
-    private static int nextAccountId = 1;
-    /*
-     *  I was unable to figure out how to keep track of different created accounts, so I used
-     *  the example that was used in the TellerApp demo
-     *
-     *  All credit for the id and keeping track of account id is not mine and is property of
-     *  github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/model/Account.java
-     */
+    private String name;         // account holder's name
+    private double balance;      // account balance
 
-    /*
-     * REQUIRES: Alphanumeric name, balance != >0, 4 digit account number
-     * EFFECTS:
-     * */
     public BankAccount(String name, double balance) {
-        id = nextAccountId++;
         this.name = name;
-        if (balance >= 0.0) {
+        if (balance >= 0.0) { // checks if the balance is valid
             this.balance = balance;
         } else {
-            this.balance = 0;
+            this.balance = 0; // if the balance is not valid, it will default to 0
         }
     }
 
     public String getName() {
-        return name;
+        return name; // returns name
     }
 
     public double getBalance() {
-        return balance;
-    }
-
-    public int getId() {
-        return id;
+        return balance; // returns balance
     }
 
     public double deposit(double amount) {
-        balance += amount;
-        return balance;
+        if (amount > 0) { // checks if given amount is valid and greater than 0
+            balance += amount; // adds given amount from account
+        }
+
+        return balance; // returns new balance
     }
 
     public double withdraw(double amount) {
-        if (getBalance() >= amount) {
-            balance -= amount;
-        } else {
-            System.out.println("Insufficient funds");
+        if (getBalance() >= amount) { // checks if the balance has enough to be withdrawn from
+            balance -= amount; // removes given amount from account
         }
-        return balance;
+
+        return balance; // returns new balance
     }
 }
