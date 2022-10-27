@@ -1,11 +1,24 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BankAccount {
     private String name;         // account holder's name
+    private String password = "";     // account holder's password
     private double balance;      // account balance
+    private List<BankAccount> bankAccountList = new ArrayList<>(); // List for accounts
 
-    public BankAccount(String name, double balance) {
+
+    // REQUIRES: balance >= 0.0
+    // MODIFIES: this.name, this.balance
+    /*
+     * EFFECTS: sets account name to given name and original balance (if entered balance is more
+     * than $0.0), if balance < 0, users balance is set to $0
+     */
+    public BankAccount(String name, String password, double balance) {
         this.name = name;
+        this.password = password;
         if (balance >= 0.0) { // checks if the balance is valid
             this.balance = balance;
         } else {
@@ -17,23 +30,51 @@ public class BankAccount {
         return name; // returns name
     }
 
+    public String getPassword() {
+        return password; //returns password
+    }
+
     public double getBalance() {
         return balance; // returns balance
     }
 
+    // REQUIRES: amount > 0
+
+    // MODIFIES: balance
+    /*
+     * EFFECTS: Checks if amount is greater than 0 and deposits to the account. if not, returns
+     *          current account balance.
+     */
     public double deposit(double amount) {
-        if (amount > 0) { // checks if given amount is valid and greater than 0
+        if (amount < 0) { // checks if given amount is less than 0
+            System.out.println("Invalid amount");
+        } else {
             balance += amount; // adds given amount from account
         }
 
         return balance; // returns new balance
     }
 
+    // REQUIRES: balance >= amount
+    // MODIFIES: balance
+    /*
+    * EFFECTS:  Checks if requested amount can be withdrawn from users account, if so the amount
+    *           will be removed from the users account, if not the users original balance will
+    *           be returned.
+    */
     public double withdraw(double amount) {
-        if (getBalance() >= amount) { // checks if the balance has enough to be withdrawn from
+        if (amount < 0) {
+            System.out.println("Invalid Amount");
+        } else if (balance >= amount) { // checks if the balance has enough to be withdrawn from
             balance -= amount; // removes given amount from account
         }
 
         return balance; // returns new balance
+    }
+
+    // Do you need to write REQUIRES/MODIFIES/EFFECTS for toString?
+    @Override
+    public String toString() {
+        return "Name: " + getName() + ", Current Balance: $" + getBalance() + ", Current Password: " + getPassword();
     }
 }
