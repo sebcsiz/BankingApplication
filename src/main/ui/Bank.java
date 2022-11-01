@@ -359,7 +359,7 @@ public class Bank {
     // MODIFIES: JSON_STORE
     // EFFECTS: Removes all accounts from JSON_STORE
     private void clearJson() throws IOException {
-        // Method from https://stackoverflow.com/questions/60264708/java-removing-content-from-json-file
+        /* Method from https://stackoverflow.com/questions/60264708/java-removing-content-from-json-file */
         Path path = Paths.get(JSON_STORE);
         File file = new File(path.toString());
         file.setWritable(true);

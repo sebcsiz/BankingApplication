@@ -14,7 +14,7 @@ class BankAccountTest {
     }
 
     @Test
-    void testNegtiveConstructorBalance() {
+    void testNegativeConstructorBalance() {
         testAccount = new BankAccount("name", "pass", -9000);
         assertEquals(testAccount.getName(), "name");
         assertEquals(testAccount.getPassword(), "pass");
