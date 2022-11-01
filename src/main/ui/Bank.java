@@ -1,7 +1,13 @@
 package ui;
 
+import model.AccountList;
 import model.BankAccount;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -14,31 +20,41 @@ public class Bank {
     BankAccount account;
     long ms = System.currentTimeMillis();
     Date date = new Date(ms);
-    private List<BankAccount> bankAccountList = new ArrayList<>();
+    private AccountList accountList;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/AccountList.json";
 
-    public Bank() {
+    // EFFECTS: Constructs AccountList and executes bankConsole
+    public Bank() throws IOException {
+        accountList = new AccountList("All Accounts");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         bankConsole(); // When bank is called in main, it will run bankConsole();
     }
 
     // MODIFIES: name, password, initialBalance, account
     /*
-     *   EFFECTS:  Welcomes the user asking for their name and if they already have an account,
-     *             if they already have an account, asks them to log in, if they do not have an account,
-     *             they are prompted to make one.
+     * EFFECTS:  Welcomes the user asking for their name and if they already have an account,
+     *           if they already have an account, asks them to log in, if they do not have an account,
+     *           they are prompted to make one.
     */
-    public void bankConsole() {
+    public void bankConsole() throws IOException {
         String userChoice;
-        System.out.print("Welcome to the Bank of CPSC: (A) Access Account (B) Create Account (LEAVE) Exit "
-                + "application, (ADMIN) Admin: ");
+        System.out.print("Welcome to the Bank of CPSC: (A) Access Account (B) Create Account (C) Load Current Account"
+                + " (LEAVE) Exit application, (ADMIN) Admin: ");
         userChoice = scanner.next();
         checkLeaveApplication(userChoice);
         if (userChoice.equalsIgnoreCase("A")) {
             logIn();
         } else if (userChoice.equalsIgnoreCase("B")) {
             createAccount();
+        } else if (userChoice.equalsIgnoreCase("C")) {
+            loadAccountList();
         } else if (userChoice.equalsIgnoreCase("ADMIN")) {
-            listAllAccountsFromStart();
+            adminChoice();
         } else {
+            saveAccountList();
             System.out.println("Bruh");
             System.exit(69);
         }
@@ -47,7 +63,7 @@ public class Bank {
     /*
     *  EFFECTS: calls menu() for user to pick action from
     */
-    public void firstMenuChoice() {
+    public void firstMenuChoice() throws IOException {
         String userChoice;
         while (true) { // Will keep looping until the user selects 'z'
             menu(); // Calls menu function;
@@ -78,7 +94,7 @@ public class Bank {
         System.out.println("(d). Delete account");
         System.out.println("(e). Gamble");
         System.out.println("(f). Admin");
-        System.out.println("(g). Logout");
+        System.out.println("(g). Logout [Saves Account]");
         System.out.println("(z). Quit");
     }
 
@@ -87,7 +103,7 @@ public class Bank {
     /*
      *  EFFECTS: Takes users input and chooses action
      */
-    public void userMenuChoice(String choice) {
+    public void userMenuChoice(String choice) throws IOException {
         // Depending on the users choice,
         if (choice.equalsIgnoreCase("a")) {
             deposit(); // calls the deposit function
@@ -102,8 +118,10 @@ public class Bank {
         } else if (choice.equalsIgnoreCase("f")) {
             listAllAccounts();
         } else if (choice.equalsIgnoreCase("g")) {
+            saveAccountList();
             logOut();
         } else if (choice.equalsIgnoreCase("z")) {
+            saveAccountList();
             System.exit(0);
         }
     }
@@ -173,7 +191,7 @@ public class Bank {
         checkPassword();
         System.out.println("What do you want to change your password to?");
         userChoice = scanner.next();
-        password = userChoice;
+        account.setPassword(userChoice);
         System.out.println("Password successfully changed");
     }
 
@@ -182,11 +200,10 @@ public class Bank {
      * EFFECTS:  Loops through bankAccountList. Once the loop idx equals the current users name, that account is
      *           removed from bankAccountList
      */
-    public void deleteAccount() {
-        for (int i = 0; i < bankAccountList.size(); i++) {
-//            if (account.getName().equals(name)) {
-            if (bankAccountList.contains(account.getName())) {
-                bankAccountList.remove(account);
+    public void deleteAccount() throws IOException {
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.containsBankAccount(account)) {
+                accountList.removeBankAccount(account);
                 System.out.println("Account Deleted");
             }
         }
@@ -226,33 +243,38 @@ public class Bank {
     }
 
     // REQUIRES: userChoice.equals(adminPassword)
+    // EFFECTS: Either prints all current accounts or clears all accounts from JSON file
+    public void adminChoice() throws IOException {
+        String userChoice;
+        System.out.println("Enter admin password");
+        userChoice = scanner.next();
+        if (userChoice.equals(adminPassword)) {
+            System.out.print("(A) List all accounts (B) Clear JSON file: ");
+            userChoice = scanner.next();
+            if (userChoice.equalsIgnoreCase("A")) {
+                listAllAccounts();
+                bankConsole();
+            } else if (userChoice.equalsIgnoreCase("B")) {
+                clearJson();
+                System.out.println("JSON File has been cleared");
+                bankConsole();
+            } else {
+                bankConsole();
+            }
+        } else {
+            bankConsole();
+        }
+    }
+
+    // REQUIRES: userChoice.equals(adminPassword)
     // EFFECTS: Prints out all current accounts to console
     public void listAllAccounts() {
         String userChoice;
         System.out.println("Enter admin password");
         userChoice = scanner.next();
         if (userChoice.equals(adminPassword)) {
-            for (BankAccount a : bankAccountList) {
-                System.out.println("-" + a.toString());
-            }
+            accountList.printAccountList();
         }
-    }
-
-    // REQUIRES: userChoice.equals(adminPassword)
-    /*
-     * EFFECTS: Same as listAllAccounts(), except this is for the start screen. If this is called then once all the
-     *          accounts are printed, it will return the user back to the start screen and not the user choice menu
-     */
-    public void listAllAccountsFromStart() {
-        String userChoice;
-        System.out.println("Enter admin password");
-        userChoice = scanner.next();
-        if (userChoice.equals(adminPassword)) {
-            for (BankAccount a : bankAccountList) {
-                System.out.println("-" + a.toString());
-            }
-        }
-        bankConsole();
     }
 
     // REQUIRES: userIn.equals("LEAVE")
@@ -264,27 +286,23 @@ public class Bank {
         }
     }
 
-    // REQUIRES: a.getName().equals(name) and password.equals(account.getPassword())
+    // REQUIRES: accountList.accountLogIn(userChoiceName, userChoicePass)
     /*
      * EFFECTS: Loops through bankAccountList to see if the given AccountID exists in the List, if so, user will be
      *          prompted to enter their password to access their account
      */
-    public void logIn() {
-        String userChoice;
+    public void logIn() throws IOException {
+        String userChoiceName;
+        String userChoicePass;
         System.out.print("Enter your name (Account ID): ");
-        name = scanner.next();
-        for (BankAccount bankAccount : bankAccountList) {
-            if (bankAccount.getName().equals(name)) {
-                System.out.print("Enter your password: ");
-                userChoice = scanner.next();
-                if (userChoice.equals(account.getPassword())) {
-                    firstMenuChoice();
-                } else {
-                    break;
-                }
-            }
+        userChoiceName = scanner.next();
+        System.out.print("Enter your password: ");
+        userChoicePass = scanner.next();
+        if (accountList.accountLogIn(userChoiceName, userChoicePass) == true) {
+            account();
+            firstMenuChoice();
         }
-        System.out.println("Cannot find account with Account ID \"" + name + "\"");
+        System.out.println("Cannot find Account.");
         bankConsole();
     }
 
@@ -292,15 +310,14 @@ public class Bank {
     /*
      * EFFECTS:
      */
-    public void logOut() {
-//        account = null;
+    public void logOut() throws IOException {
         bankConsole();
     }
 
     /*
      * EFFECTS: Creates a new BankAccount object with user-given name, password, and initial balance
      */
-    public void createAccount() {
+    public void createAccount() throws IOException {
         System.out.println("If you want to exit the application, enter 'LEAVE'");
         System.out.print("What is your name? (This will be your Account ID): ");
         name = scanner.next();
@@ -311,7 +328,44 @@ public class Bank {
         System.out.println("How much would you like to originally deposit?: ");
         balance = scanner.nextDouble();
         account = new BankAccount(name, password, balance);
-        bankAccountList.add(account);
+        accountList.addBankAccount(account);
         firstMenuChoice();
+    }
+
+    // EFFECTS: saves the AccountList to file
+    private void saveAccountList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(accountList);
+            jsonWriter.close();
+            System.out.println("Saved " + accountList.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads AccountList from file
+    private void loadAccountList() throws IOException {
+        try {
+            accountList = jsonReader.read();
+            System.out.println("Loaded " + accountList.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        bankConsole();
+    }
+
+    // MODIFIES: JSON_STORE
+    // EFFECTS: Removes all accounts from JSON_STORE
+    private void clearJson() throws IOException {
+        // Method from https://stackoverflow.com/questions/60264708/java-removing-content-from-json-file
+        Path path = Paths.get(JSON_STORE);
+        File file = new File(path.toString());
+        file.setWritable(true);
+        BufferedOutputStream bufferedOutputStream
+                = new BufferedOutputStream(new FileOutputStream(path.toString()));
+        bufferedOutputStream.write("{}".getBytes());
+        bufferedOutputStream.flush();
     }
 }

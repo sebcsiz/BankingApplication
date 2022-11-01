@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankAccount {
+public class BankAccount implements Writable {
     private String name;         // account holder's name
     private String password = "";     // account holder's password
     private double balance;      // account balance
@@ -28,6 +31,10 @@ public class BankAccount {
 
     public String getName() {
         return name; // returns name
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPassword() {
@@ -77,4 +84,14 @@ public class BankAccount {
     public String toString() {
         return "Name: " + getName() + ", Current Balance: $" + getBalance() + ", Current Password: " + getPassword();
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("password", password);
+        json.put("balance", balance);
+        return json;
+    }
+
 }

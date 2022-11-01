@@ -27,3 +27,9 @@ As a user, I want to be able to have my account be password/pin protected
 As a user, I want to be able to deposit and withdraw money from my account
 
 As a user, I want to be able to close/delete a bank account
+
+As a user, I want to be able to save my account
+
+As a user, I want to be able to load my account
+
+All JSON related code is from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
