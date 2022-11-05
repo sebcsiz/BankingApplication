@@ -34,4 +34,5 @@ As a user, I want to be able to save my account
 
 As a user, I want to be able to load my account
 
-All JSON related code is from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+All JSON related code is from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo <br>
+GUI was made referencing: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete 
