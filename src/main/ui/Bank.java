@@ -41,15 +41,13 @@ public class Bank {
     */
     public void bankConsole() throws IOException {
         String userChoice;
-        System.out.print("Welcome to the Bank of CPSC: (A) Access Account (B) Create Account (C) Load Current Account"
+        System.out.print("Welcome to the Bank of CPSC: (A) Create Account (B) Load Current Account"
                 + " (LEAVE) Exit application, (ADMIN) Admin: ");
         userChoice = scanner.next();
         checkLeaveApplication(userChoice);
         if (userChoice.equalsIgnoreCase("A")) {
-            logIn();
-        } else if (userChoice.equalsIgnoreCase("B")) {
             createAccount();
-        } else if (userChoice.equalsIgnoreCase("C")) {
+        } else if (userChoice.equalsIgnoreCase("B")) {
             loadAccountList();
         } else if (userChoice.equalsIgnoreCase("ADMIN")) {
             adminChoice();
@@ -284,26 +282,6 @@ public class Bank {
             System.out.println("Goodbye!");
             System.exit(0);
         }
-    }
-
-    // REQUIRES: accountList.accountLogIn(userChoiceName, userChoicePass)
-    /*
-     * EFFECTS: Loops through bankAccountList to see if the given AccountID exists in the List, if so, user will be
-     *          prompted to enter their password to access their account
-     */
-    public void logIn() throws IOException {
-        String userChoiceName;
-        String userChoicePass;
-        System.out.print("Enter your name (Account ID): ");
-        userChoiceName = scanner.next();
-        System.out.print("Enter your password: ");
-        userChoicePass = scanner.next();
-        if (accountList.accountLogIn(userChoiceName, userChoicePass) == true) {
-            account();
-            firstMenuChoice();
-        }
-        System.out.println("Cannot find Account.");
-        bankConsole();
     }
 
     // REQUIRES:

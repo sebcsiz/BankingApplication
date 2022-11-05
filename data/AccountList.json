@@ -1,25 +1,8 @@
 {
     "name": "All Accounts",
-    "accounts": [
-        {
-            "password": "dad",
-            "balance": 1000,
-            "name": "Miro"
-        },
-        {
-            "password": "mom",
-            "balance": 1000,
-            "name": "Veronika"
-        },
-        {
-            "password": "brother",
-            "balance": 1000,
-            "name": "Chris"
-        },
-        {
-            "password": "me",
-            "balance": 1000,
-            "name": "Sebastian"
-        }
-    ]
+    "accounts": [{
+        "password": "pass",
+        "balance": 800,
+        "name": "asdf"
+    }]
 }
