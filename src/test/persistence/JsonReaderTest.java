@@ -22,7 +22,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyAccountList() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyAccountList.json");
+        JsonReader reader = new JsonReader("./data/JsonTests/testReaderEmptyAccountList.json");
         try {
             AccountList al = reader.read();
             assertEquals("My account list", al.getName());
@@ -34,7 +34,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderAddAccount() {
-        JsonReader reader = new JsonReader("./data/testReaderAddAccount.json");
+        JsonReader reader = new JsonReader("./data/JsonTests/testReaderAddAccount.json");
         try {
             AccountList al = reader.read();
             al.addBankAccount(new BankAccount("testName", "testPass", 100));
@@ -44,4 +44,15 @@ class JsonReaderTest extends JsonTest {
             fail("Couldn't read from file");
         }
     }
+
+//    @Test
+//    void testReaderAddAccount() {
+//        JsonReader reader = new JsonReader("./data/testReaderAddAccounts.json");
+//        try {
+//            AccountList al = reader.read();
+//            al.addBankAccounts()
+//        } catch (IOException e) {
+//            fail("Couldn't read from file");
+//        }
+//    }
 }

@@ -3,14 +3,10 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BankAccount implements Writable {
     private String name;         // account holder's name
     private String password = "";     // account holder's password
     private double balance;      // account balance
-    private List<BankAccount> bankAccountList = new ArrayList<>(); // List for accounts
 
 
     // REQUIRES: balance >= 0.0

@@ -22,6 +22,8 @@ try and implement some real-life algorithms myself (such as ***Luhns Algorithm**
 ## User Stories
 As a user, I want to be able to be able to create multiple bank accounts
 
+As an admin, I want to be able to view all created accounts
+
 As a user, I want to be able to have my account be password/pin protected
 
 As a user, I want to be able to deposit and withdraw money from my account
