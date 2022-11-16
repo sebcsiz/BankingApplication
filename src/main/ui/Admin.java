@@ -49,6 +49,8 @@ public class Admin extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Enter")) {
             if (passwordText.getText().equals("scsiz")) {
                 new InAdmin();
+            } else {
+                new Main();
             }
         }
     }

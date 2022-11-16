@@ -1,6 +1,7 @@
 package ui;
 
 import model.BankAccount;
+import ui.actions.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,17 +13,20 @@ import java.io.IOException;
 
 public class InAccount extends JFrame implements ActionListener {
 
-    BankAccount account;
-    JLabel welcome;
-    JLabel welcome1;
+    private BankAccount account;
 
-    private JButton deposit = new JButton("Deposit");
-    private JButton withdraw = new JButton("Withdraw");
-    private JButton changePass = new JButton("Change Password");
-    private JButton deleteAcc = new JButton("Delete Account");
-    private JButton gamble = new JButton("Gamble");
-    private JButton admin = new JButton("Admin");
-    private JButton logout = new JButton("Log Out");
+    private JButton depositButton = new JButton("Deposit");
+    private JButton withdrawButton = new JButton("Withdraw");
+    private JButton changePassButton = new JButton("Change Password");
+    private JButton deleteAccButton = new JButton("Delete Account");
+    private JButton gambleButton = new JButton("Gamble");
+    private JButton adminButton = new JButton("Admin");
+    private JButton logoutButton = new JButton("Log Out");
+
+    private JTextField textDeposit = new JTextField();
+    private JButton buttonDeposit = new JButton("Ok");
+    private JTextField textWithdraw = new JTextField();
+    private JButton buttonWithdraw = new JButton("Ok");
 
     public InAccount(BankAccount account) {
         this.account = account;
@@ -44,50 +48,53 @@ public class InAccount extends JFrame implements ActionListener {
     public void listOptions() {
         welcomeMessage();
 
-        deposit.setBounds(10,70,250,40);
-        deposit.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        deposit.setFocusable(false);
-        deposit.addActionListener(this);
-        add(deposit);
+        depositButton.setBounds(10,70,250,40);
+        depositButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        depositButton.setFocusable(false);
+        depositButton.addActionListener(this);
+        add(depositButton);
 
-        withdraw.setBounds(10,120,250,40);
-        withdraw.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        withdraw.setFocusable(false);
-        withdraw.addActionListener(this);
-        add(withdraw);
+        withdrawButton.setBounds(10,120,250,40);
+        withdrawButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        withdrawButton.setFocusable(false);
+        withdrawButton.addActionListener(this);
+        add(withdrawButton);
 
-        changePass.setBounds(10,170,250,40);
-        changePass.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        changePass.setFocusable(false);
-        changePass.addActionListener(this);
-        add(changePass);
+        changePassButton.setBounds(10,170,250,40);
+        changePassButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        changePassButton.setFocusable(false);
+        changePassButton.addActionListener(this);
+        add(changePassButton);
 
-        deleteAcc.setBounds(10,220,250,40);
-        deleteAcc.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        deleteAcc.setFocusable(false);
-        deleteAcc.addActionListener(this);
-        add(deleteAcc);
+        deleteAccButton.setBounds(10,220,250,40);
+        deleteAccButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        deleteAccButton.setFocusable(false);
+        deleteAccButton.addActionListener(this);
+        add(deleteAccButton);
 
-        gamble.setBounds(10,270,250,40);
-        gamble.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        gamble.setFocusable(false);
-        gamble.addActionListener(this);
-        add(gamble);
+        gambleButton.setBounds(10,270,250,40);
+        gambleButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        gambleButton.setFocusable(false);
+        gambleButton.addActionListener(this);
+        add(gambleButton);
 
-        admin.setBounds(10,320,250,40);
-        admin.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        admin.setFocusable(false);
-        admin.addActionListener(this);
-        add(admin);
+        adminButton.setBounds(10,320,250,40);
+        adminButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        adminButton.setFocusable(false);
+        adminButton.addActionListener(this);
+        add(adminButton);
 
-        logout.setBounds(10,370,250,40);
-        logout.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        logout.setFocusable(false);
-        logout.addActionListener(this);
-        add(logout);
+        logoutButton.setBounds(10,370,250,40);
+        logoutButton.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        logoutButton.setFocusable(false);
+        logoutButton.addActionListener(this);
+        add(logoutButton);
     }
 
     public void welcomeMessage() {
+        JLabel welcome;
+        JLabel welcome1;
+
         welcome = new JLabel("Hello " + account.getName() + ", Currently: " + Bank.getDate());
         welcome.setBounds(0,0,800,25);
         welcome.setFont(new Font(Font.MONOSPACED, Font.BOLD,25));
@@ -99,22 +106,55 @@ public class InAccount extends JFrame implements ActionListener {
         add(welcome1);
     }
 
+    public void deposit() {
+        textDeposit = new JTextField();
+        buttonDeposit = new JButton("Ok");
+
+        textDeposit.setBounds(300,70,150,25);
+        textDeposit.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        textDeposit.addActionListener(this);
+        add(textDeposit);
+
+        buttonDeposit.setBounds(400,70,100,25);
+        buttonDeposit.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        buttonDeposit.setFocusable(false);
+        buttonDeposit.addActionListener(this);
+        add(buttonDeposit);
+    }
+
+    public void withdraw() {
+        textWithdraw = new JTextField();
+        buttonWithdraw = new JButton("Ok");
+
+        textWithdraw.setBounds(270,100,150,25);
+        textWithdraw.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        textWithdraw.addActionListener(this);
+        add(textWithdraw);
+
+        buttonWithdraw.setBounds(430,100,100,25);
+        buttonWithdraw.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        buttonWithdraw.setFocusable(false);
+        buttonWithdraw.addActionListener(this);
+        add(buttonWithdraw);
+    }
+
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Deposit")) {
-            print(null);
+            new Deposit(this.account);
         }
         if (e.getActionCommand().equals("Withdraw")) {
-            print(null);
+            new Withdraw(this.account);
         }
         if (e.getActionCommand().equals("Change Password")) {
-            print(null);
+            new ChangePass(this.account);
         }
         if (e.getActionCommand().equals("Delete Account")) {
-            print(null);
+            new DeleteAccount(this.account);
         }
         if (e.getActionCommand().equals("Gamble")) {
-            print(null);
+            new Gamble(this.account);
         }
         if (e.getActionCommand().equals("Admin")) {
             new Admin();
@@ -122,6 +162,9 @@ public class InAccount extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Log Out")) {
             dispose();
             new Main();
+        }
+        if (e.getActionCommand().equals("Ok")) {
+            new InAccount(this.account);
         }
     }
 }
