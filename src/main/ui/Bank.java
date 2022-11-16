@@ -18,8 +18,8 @@ public class Bank {
     final String adminPassword = "scsiz";
     double balance;
     BankAccount account;
-    long ms = System.currentTimeMillis();
-    Date date = new Date(ms);
+    static long ms = System.currentTimeMillis();
+    static Date date = new Date(ms);
     private AccountList accountList;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -308,6 +308,10 @@ public class Bank {
         account = new BankAccount(name, password, balance);
         accountList.addBankAccount(account);
         firstMenuChoice();
+    }
+
+    public static Date getDate() {
+        return date;
     }
 
     // EFFECTS: saves the AccountList to file
