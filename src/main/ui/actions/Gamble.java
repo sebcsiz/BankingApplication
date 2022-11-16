@@ -9,45 +9,50 @@ import java.awt.event.ActionEvent;
 
 public class Gamble extends Action {
 
-    private JTextField text;
+    private JTextField amountEntered;
     private JLabel label;
     private JButton button;
-
+    private JButton button1;
 
     public Gamble(BankAccount account) {
         super(account);
-        gamble();
-    }
-
-    public void gamble() {
         initializeSwing();
-
     }
 
     public void initializeSwing() {
-        text = new JTextField();
+        amountEntered = new JTextField();
         label = new JLabel("Enter Amount (Odds 3:1)");
-        button = new JButton("I'm Feeling Lucky");
+        button = new JButton("Bet");
+        button1 = new JButton("Quit");
 
-        label.setBounds(250,180,2000,75);
+        label.setBounds(430,180,2000,75);
         label.setFont(new Font(Font.MONOSPACED, Font.BOLD,50));
         add(label);
 
-        text.setBounds(640,250,300,25);
-        text.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        text.addActionListener(this);
-        add(text);
+        amountEntered.setBounds(640,250,300,25);
+        amountEntered.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        amountEntered.addActionListener(this);
+        add(amountEntered);
 
-        button.setBounds(600,500,400,75);
+        button.setBounds(460,300,300,50);
         button.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
         button.setFocusable(false);
         button.addActionListener(this);
         add(button);
+
+        button1.setBounds(800,300,300,50);
+        button1.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        button1.setFocusable(false);
+        button1.addActionListener(this);
+        add(button1);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Continue")) {
+        if (e.getActionCommand().equals("Bet")) {
+            new GambleFinal(this.account, Integer.parseInt(amountEntered.getText()));
+        }
+        if (e.getActionCommand().equals("Quit")) {
             dispose();
             new InAccount(this.account);
         }

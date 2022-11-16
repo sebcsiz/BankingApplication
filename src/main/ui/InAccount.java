@@ -106,38 +106,6 @@ public class InAccount extends JFrame implements ActionListener {
         add(welcome1);
     }
 
-    public void deposit() {
-        textDeposit = new JTextField();
-        buttonDeposit = new JButton("Ok");
-
-        textDeposit.setBounds(300,70,150,25);
-        textDeposit.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        textDeposit.addActionListener(this);
-        add(textDeposit);
-
-        buttonDeposit.setBounds(400,70,100,25);
-        buttonDeposit.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        buttonDeposit.setFocusable(false);
-        buttonDeposit.addActionListener(this);
-        add(buttonDeposit);
-    }
-
-    public void withdraw() {
-        textWithdraw = new JTextField();
-        buttonWithdraw = new JButton("Ok");
-
-        textWithdraw.setBounds(270,100,150,25);
-        textWithdraw.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        textWithdraw.addActionListener(this);
-        add(textWithdraw);
-
-        buttonWithdraw.setBounds(430,100,100,25);
-        buttonWithdraw.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
-        buttonWithdraw.setFocusable(false);
-        buttonWithdraw.addActionListener(this);
-        add(buttonWithdraw);
-    }
-
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {

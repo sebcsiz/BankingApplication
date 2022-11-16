@@ -46,7 +46,7 @@ public class DeleteAccount extends Action {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Yes")) {
-            account = null;
+            this.account = null;
             dispose();
             new Main();
         }

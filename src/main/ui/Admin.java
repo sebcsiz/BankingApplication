@@ -1,5 +1,7 @@
 package ui;
 
+import ui.actions.SetBackground;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,8 @@ public class Admin extends JFrame implements ActionListener {
     private JLabel passwordLabel = new JLabel("Admin Password");
     private JTextField passwordText = new JTextField(15);
     private JButton button = new JButton("Enter");
+    private JButton button1 = new JButton("List Accounts");
+    private JButton button2 = new JButton("Clear JSON");
 
     public Admin() {
         try {
@@ -44,13 +48,26 @@ public class Admin extends JFrame implements ActionListener {
         add(passwordText);
     }
 
+    public void setBackground(String fileName) {
+        try {
+            final Image backgroundImage = ImageIO.read(new File(fileName));
+            setContentPane(new JPanel(new BorderLayout()) {
+                @Override public void paintComponent(Graphics g) {
+                    g.drawImage(backgroundImage, 0, 0, null);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Enter")) {
             if (passwordText.getText().equals("scsiz")) {
                 new InAdmin();
             } else {
-                new Main();
+                new SetBackground("data/bosnia.jpg");
             }
         }
     }

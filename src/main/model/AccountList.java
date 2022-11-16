@@ -53,16 +53,6 @@ public class AccountList implements Writable {
         }
     }
 
-    // EFFECTS: checks if users enter details matches a current account
-    public boolean accountLogIn(String name, String password) {
-        for (BankAccount bk : accounts) {
-            if (name.equals(bk.getName()) && password.equals(bk.getPassword())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

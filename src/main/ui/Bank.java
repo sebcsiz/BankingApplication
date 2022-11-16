@@ -20,8 +20,8 @@ public class Bank {
     BankAccount account;
     static long ms = System.currentTimeMillis();
     static Date date = new Date(ms);
-    private AccountList accountList;
-    private JsonWriter jsonWriter;
+    private static AccountList accountList;
+    private static JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/AccountList.json";
 
@@ -315,7 +315,7 @@ public class Bank {
     }
 
     // EFFECTS: saves the AccountList to file
-    private void saveAccountList() {
+    static void saveAccountList() {
         try {
             jsonWriter.open();
             jsonWriter.write(accountList);

@@ -31,7 +31,6 @@ public class CreateAccount extends JFrame implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setBackground(new Color(255,255,255));
         createAccountTextFields();
         button.setBounds(600,500,400,75);
         button.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));

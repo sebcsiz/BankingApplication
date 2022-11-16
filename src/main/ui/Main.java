@@ -6,14 +6,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class Main extends JFrame implements ActionListener {
 
     private JButton button;
     private JButton button1;
     private JButton button2;
+    private JButton button3;
     private JLabel label;
 
     public Main() {
@@ -45,7 +45,6 @@ public class Main extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // Method is 26 lines
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void mainMenuButtons() {
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(600, 130, 700, 130));
@@ -69,12 +68,19 @@ public class Main extends JFrame implements ActionListener {
         button1.addActionListener(this);
         add(button1);
 
-        button2 = new JButton("Exit");
+        button2 = new JButton("Load Accounts");
         button2.setBounds(100,350,300,80);
         button2.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
         button2.setFocusable(false);
         button2.addActionListener(this);
         add(button2);
+
+        button3 = new JButton("Exit");
+        button3.setBounds(100,450,300,80);
+        button3.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
+        button3.setFocusable(false);
+        button3.addActionListener(this);
+        add(button3);
     }
 
     public void setBackground(String fileName) {
@@ -99,6 +105,9 @@ public class Main extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Admin")) {
             dispose();
             new Admin();
+        }
+        if (e.getActionCommand().equals("Load Accounts")) {
+            print(null);
         }
         if (e.getActionCommand().equals("Exit")) {
             System.exit(0);
