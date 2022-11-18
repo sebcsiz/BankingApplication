@@ -57,7 +57,7 @@ public class Admin extends JFrame implements ActionListener {
             if (passwordText.getText().equals("scsiz")) {
                 new InAdmin();
             } else {
-                new SetBackground("data/bosnia.jpg");
+                new SetBackground("data/brick.png");
             }
         }
     }
