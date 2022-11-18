@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+// Abstract class to create new GUI window
 public abstract class Action extends JFrame implements ActionListener {
 
     BankAccount account;

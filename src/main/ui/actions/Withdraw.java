@@ -7,18 +7,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+// Allows user to withdraw funds from their account
 public class Withdraw extends Action {
 
     private JTextField text;
     private JLabel label;
     private JButton button;
 
-
+    // REQUIRES: account
+    // MODIFIES: account
+    // EFFECTS: calls withdraw
     public Withdraw(BankAccount account) {
         super(account);
         withdraw();
     }
 
+    // EFFECTS: creates text box, label, and button
     public void withdraw() {
         text = new JTextField();
         label = new JLabel("How much would you like to withdraw?");
@@ -41,6 +45,8 @@ public class Withdraw extends Action {
 
     }
 
+    // REQUIRES: e
+    // EFFECTS: subtracts requested amount from users account if user has enough
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Continue")) {

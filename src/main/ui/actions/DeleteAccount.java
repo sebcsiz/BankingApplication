@@ -1,5 +1,6 @@
 package ui.actions;
 
+import model.AccountList;
 import model.BankAccount;
 import ui.InAccount;
 import ui.Main;
@@ -8,18 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+// Allows user to delete their current account
 public class DeleteAccount extends Action {
+
+    private AccountList accountList;
 
     private JLabel label;
     private JButton yes;
     private JButton no;
 
-
+    // REQUIRES: account
+    // EFFECTS: calls deleteAccount()
     public DeleteAccount(BankAccount account) {
         super(account);
         deleteAccount();;
     }
 
+    // EFFECTS: creates text and buttons
     public void deleteAccount() {
         label = new JLabel("Delete account");
         yes = new JButton("Yes");
@@ -43,10 +49,13 @@ public class DeleteAccount extends Action {
 
     }
 
+    // REQUIRES: e
+    // EFFECTS: either removes account and goes to main menu, or goes back to account menu
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Yes")) {
-            this.account = null;
+            accountList = Main.getAccountList();
+            accountList.removeBankAccount(this.account);
             dispose();
             new Main();
         }

@@ -34,5 +34,18 @@ As a user, I want to be able to save my account
 
 As a user, I want to be able to load my account
 
+## Instructions for Grader
+- To generate a Bank Account (X) click on the <b>Create Account</b> button in the main menu. This will add a new Bank 
+Account (X) to an Account List (Y) accessible via an admin password.
+
+- To generate the second required event, click any of the buttons given after you created you account. For example, you 
+can deposit money, withdraw money, delete your account etc.
+s
+- When you run the application, you will see a giant picture of Lebron James as the background. This is my visual component
+
+- To save the state of the application to file, click the <b>Log out</b> button. This will save your data 
+
+- To load the state of the application from file, click the <b>Load Accounts</b> button that is in the main menu
+
 All JSON related code is from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo <br>
 GUI was made referencing: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete 

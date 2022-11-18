@@ -1,6 +1,8 @@
 package ui;
 
+import model.AccountList;
 import model.BankAccount;
+import persistence.JsonWriter;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,11 +12,16 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+// Prompts user to enter new account details, and creates a new account
 public class CreateAccount extends JFrame implements ActionListener {
 
+    private BankAccount bankAccount;
+    private AccountList accountList;
     private static String name;
     private String password;
     private int bal;
+    private static JsonWriter jsonWriter;
+    private static final String JSON_STORE = "./data/AccountList.json";
 
     private JLabel userLabel = new JLabel("Name");
     private JTextField userText = new JTextField(15);
@@ -24,8 +31,9 @@ public class CreateAccount extends JFrame implements ActionListener {
     private JTextField initialBalanceText = new JTextField(15);
     private JButton button = new JButton("Continue");
 
-
+    // EFFECTS: Creates window and button. Calls createAccountTextFields()
     public CreateAccount() {
+        jsonWriter = new JsonWriter(JSON_STORE);
         try {
             setIconImage(ImageIO.read(new File("data/money.png")));
         } catch (IOException e) {
@@ -43,6 +51,7 @@ public class CreateAccount extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // EFFECTS: creates labels and text fields
     public void createAccountTextFields() {
 
         userLabel.setBounds(720,180,300,75);
@@ -73,14 +82,20 @@ public class CreateAccount extends JFrame implements ActionListener {
         add(initialBalanceText);
     }
 
+    // REQUIRES: e
+    // MODIFIES: name, password, balance, bankAccount, accountList. Adds new bankAccount and goes to account menu
+    // EFFECTS:
     @Override
     public void actionPerformed(ActionEvent e) {
         name = userText.getText();
         password = passwordText.getText();
         bal = Integer.parseInt(initialBalanceText.getText());
+        bankAccount = new BankAccount(name, password, bal);
         if (e.getActionCommand().equals("Continue")) {
+            accountList = Main.getAccountList();
+            accountList.addBankAccount(bankAccount);
             dispose();
-            new InAccount(new BankAccount(name, password, bal));
+            new InAccount(bankAccount);
         }
     }
 }

@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+// Admin log in screen
 public class Admin extends JFrame implements ActionListener {
 
     private JLabel passwordLabel = new JLabel("Admin Password");
     private JTextField passwordText = new JTextField(15);
     private JButton button = new JButton("Enter");
-    private JButton button1 = new JButton("List Accounts");
-    private JButton button2 = new JButton("Clear JSON");
 
+    // EFFECTS: creates window and button. Calls adminLogIn()
     public Admin() {
         try {
             setIconImage(ImageIO.read(new File("data/money.png")));
@@ -37,6 +37,7 @@ public class Admin extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // EFFECTS: creates label, text box
     public void adminLogIn() {
         passwordLabel.setBounds(570,260,500,75);
         passwordLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD,50));
@@ -48,19 +49,8 @@ public class Admin extends JFrame implements ActionListener {
         add(passwordText);
     }
 
-    public void setBackground(String fileName) {
-        try {
-            final Image backgroundImage = ImageIO.read(new File(fileName));
-            setContentPane(new JPanel(new BorderLayout()) {
-                @Override public void paintComponent(Graphics g) {
-                    g.drawImage(backgroundImage, 0, 0, null);
-                }
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    // REQUIRES: e
+    // EFFECTS: checks if entered password is equal to admin password and grants access to admin "commands"
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Enter")) {

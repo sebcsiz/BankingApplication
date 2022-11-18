@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+// Allows user to gamble their balance
 public class Gamble extends Action {
 
     private JTextField amountEntered;
@@ -14,11 +15,14 @@ public class Gamble extends Action {
     private JButton button;
     private JButton button1;
 
+    // REQUIRES: account
+    // EFFECTS: calls initializeSwing()
     public Gamble(BankAccount account) {
         super(account);
         initializeSwing();
     }
 
+    // EFFECTS: takes in user bet and creates label and buttons
     public void initializeSwing() {
         amountEntered = new JTextField();
         label = new JLabel("Enter Amount (Odds 3:1)");
@@ -47,6 +51,8 @@ public class Gamble extends Action {
         add(button1);
     }
 
+    // REQUIRES: e
+    // EFFECTS: either calls new GambleFinal or goes back to account screen if user doesn't have enough funds
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Bet")) {

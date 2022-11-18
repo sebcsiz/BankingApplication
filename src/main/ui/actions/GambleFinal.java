@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
+// Creates a random number [1, 10] and checks users guess to the random number
 public class GambleFinal extends Action {
 
     java.util.Random rndNum = new Random();
@@ -18,12 +19,16 @@ public class GambleFinal extends Action {
     private JLabel label;
     private JButton button;
 
+    // REQUIRES: account, gambleAmount
+    // MODIFIES: account
+    // EFFECTS: calls gamble()
     public GambleFinal(BankAccount account, int gambleAmount) {
         super(account);
         amountEntered = gambleAmount;
         gamble();
     }
 
+    // EFFECTS: creates label and button and gets guess from user
     public void gamble() {
         label = new JLabel("Choose a number between 1-10");
         numberGuessed = new JTextField();
@@ -45,7 +50,8 @@ public class GambleFinal extends Action {
         add(button);
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    // REQUIRES: e
+    // EFFECTS: either adds 3 times user bet if user guess is the right number, or removes bet amount from users account
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("I'm Feeling Lucky")) {

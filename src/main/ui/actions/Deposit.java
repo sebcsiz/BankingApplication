@@ -7,18 +7,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+// Allows user to deposit money into their account
 public class Deposit extends Action {
 
     private JTextField text;
     private JLabel label;
     private JButton button;
 
-
+    // REQUIRES: account
+    // EFFECTS: calls deposit()
     public Deposit(BankAccount account) {
         super(account);
         deposit();
     }
 
+    // EFFECTS: creates text, label, and button
     public void deposit() {
         text = new JTextField();
         label = new JLabel("How much would you like to deposit?");
@@ -41,6 +44,8 @@ public class Deposit extends Action {
 
     }
 
+    // REQUIRES: e
+    // EFFECTS: deposits amount into account, then goes back to account menu
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Continue")) {

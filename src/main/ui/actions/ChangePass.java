@@ -7,18 +7,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+// Allows user to change account password
 public class ChangePass extends Action {
 
     private JTextField text;
     private JLabel label;
     private JButton button;
 
-
+    // REQUIRES: account
+    // MODIFIES: account
+    // EFFECTS: calls changePassword()
     public ChangePass(BankAccount account) {
         super(account);
         changePassword();
     }
 
+    // EFFECTS: make gui for user to enter new password
     public void changePassword() {
         text = new JTextField();
         label = new JLabel("Change password to");
@@ -41,6 +45,8 @@ public class ChangePass extends Action {
 
     }
 
+    // REQUIRES: ActionEvent
+    // EFFECTS: if continue button is clicked, account changes users password, then goes back to teh InAccount window
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Continue")) {

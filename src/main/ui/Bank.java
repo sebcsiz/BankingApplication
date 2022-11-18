@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-
+// CLI
 public class Bank {
     Scanner scanner = new Scanner(System.in);
     String name;
@@ -22,7 +22,7 @@ public class Bank {
     static Date date = new Date(ms);
     private static AccountList accountList;
     private static JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private static JsonReader jsonReader;
     private static final String JSON_STORE = "./data/AccountList.json";
 
     // EFFECTS: Constructs AccountList and executes bankConsole
@@ -328,19 +328,19 @@ public class Bank {
 
     // MODIFIES: this
     // EFFECTS: loads AccountList from file
-    private void loadAccountList() throws IOException {
+    static void loadAccountList() throws IOException {
         try {
             accountList = jsonReader.read();
             System.out.println("Loaded " + accountList.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        bankConsole();
+//        bankConsole();
     }
 
     // MODIFIES: JSON_STORE
     // EFFECTS: Removes all accounts from JSON_STORE
-    private void clearJson() throws IOException {
+    static void clearJson() throws IOException {
         /* Method from https://stackoverflow.com/questions/60264708/java-removing-content-from-json-file */
         Path path = Paths.get(JSON_STORE);
         File file = new File(path.toString());

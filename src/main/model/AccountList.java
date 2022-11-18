@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AccountList implements Writable {
     private String name;
-    private List<BankAccount> accounts;
+    private static List<BankAccount> accounts;
 
     // EFFECTS: constructs new AccountList with name and empty list of BankAccounts
     public AccountList(String name) {
@@ -19,6 +19,15 @@ public class AccountList implements Writable {
 
     public String getName() {
         return name;
+    }
+
+    public BankAccount getAccounts(int index) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (i == index) {
+                return accounts.get(i);
+            }
+        }
+        return null;
     }
 
     // MODIFIES: this
@@ -47,7 +56,7 @@ public class AccountList implements Writable {
     }
 
     // EFFECTS: prints out all accounts
-    public void printAccountList() {
+    public static void printAccountList() {
         for (int i = 0; i < accounts.size(); i++) {
             System.out.println(accounts.get(i));
         }

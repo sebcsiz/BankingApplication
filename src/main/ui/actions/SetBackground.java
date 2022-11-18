@@ -6,8 +6,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+// Changes GUI background
 public class SetBackground extends JFrame {
 
+    // REQUIRES: fileName
+    // MODIFIES: JFrame
+    // EFFECTS: changes background of JFrame to given file from user
     public SetBackground(String filename) {
         try {
             setIconImage(ImageIO.read(new File("data/money.png")));
