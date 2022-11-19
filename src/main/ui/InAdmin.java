@@ -94,7 +94,12 @@ public class InAdmin extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("List Accounts")) {
-            new PrintAccounts(accountList);
+            dispose();
+            try {
+                new PrintAccounts();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         if (e.getActionCommand().equals("Clear JSON")) {
             try {
@@ -104,6 +109,7 @@ public class InAdmin extends JFrame implements ActionListener {
             }
         }
         if (e.getActionCommand().equals("Back to Menu")) {
+            dispose();
             new Main();
         }
     }

@@ -43,7 +43,7 @@ public class Main extends JFrame implements ActionListener {
     }
 
     // EFFECTS: create new GUI
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Main();
     }
 
@@ -176,16 +176,30 @@ public class Main extends JFrame implements ActionListener {
         clip.stop();
     }
 
-    // MODIFIES: writer
-    // EFFECTS: saves the AccountList to file
-    public static void saveAccountList() {
+    // MODIFIES: this
+    // EFFECTS: loads AccountList from file
+    public static void loadAccountList() throws IOException {
         try {
-            writer.open();
-            writer.write(accountList);
-            writer.close();
-            System.out.println("Saved " + accountList.getName() + " to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            accountList = reader.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createAccountListener() {
+        dispose();
+        try {
+            new CreateAccount(accountList);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void loadAccountListener() {
+        try {
+            loadAccountList();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
@@ -195,18 +209,14 @@ public class Main extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Create Account")) {
             dispose();
-            new CreateAccount();
+            createAccountListener();
         }
         if (e.getActionCommand().equals("Admin")) {
             dispose();
             new Admin();
         }
         if (e.getActionCommand().equals("Load Accounts")) {
-            try {
-                Bank.loadAccountList();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            loadAccountListener();
         }
         if (e.getActionCommand().equals("Exit")) {
             System.exit(0);

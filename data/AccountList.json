@@ -2,7 +2,7 @@
     "name": "List of Accounts",
     "accounts": [{
         "password": "password",
-        "balance": 90000,
-        "name": "Chris"
+        "balance": 600,
+        "name": "Sebastian"
     }]
 }

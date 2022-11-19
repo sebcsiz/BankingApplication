@@ -171,6 +171,7 @@ public class InAccount extends JFrame implements ActionListener {
     // EFFECTS: choose which window to open based on which button the user clicked
     @Override
     public void actionPerformed(ActionEvent e) {
+        dispose();
         if (e.getActionCommand().equals("Deposit")) {
             new Deposit(this.account);
         }

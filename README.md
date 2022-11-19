@@ -42,7 +42,7 @@ Account (X) to an Account List (Y) accessible via an admin password.
 can deposit money, withdraw money, delete your account etc.
 
 - When you run the application, you will see a giant picture of Lebron James as the background. This is my visual component.
-or if you would prefer, you can click on the button of animated Gunna, Young Thug, and Future pushing a blue 3D cube with
+Or if you would prefer, you can click on the button of animated Gunna, Young Thug, and Future pushing a blue 3D cube with
 a 'P' on it.
 
 - To save the state of the application to file, click the <b>Log out</b> button. This will save your data 

@@ -56,6 +56,7 @@ public class Gamble extends Action {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Bet")) {
+            dispose();
             new GambleFinal(this.account, Integer.parseInt(amountEntered.getText()));
         }
         if (e.getActionCommand().equals("Quit")) {

@@ -55,8 +55,10 @@ public class Admin extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Enter")) {
             if (passwordText.getText().equals("scsiz")) {
+                dispose();
                 new InAdmin();
             } else {
+                dispose();
                 new SetBackground("data/brick.png");
             }
         }

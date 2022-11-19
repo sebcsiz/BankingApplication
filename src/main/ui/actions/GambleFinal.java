@@ -60,6 +60,7 @@ public class GambleFinal extends Action {
             } else {
                 account.withdraw(amountEntered);
             }
+            dispose();
             new InAccount(this.account);
         }
     }

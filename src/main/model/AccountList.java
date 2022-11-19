@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class AccountList implements Writable {
 
     public String getName() {
         return name;
+    }
+
+    public List<BankAccount> getAccounts() {
+        return accounts;
     }
 
     public BankAccount getAccounts(int index) {
@@ -56,10 +61,11 @@ public class AccountList implements Writable {
     }
 
     // EFFECTS: prints out all accounts
-    public static void printAccountList() {
+    public static Component printAccountList() {
         for (int i = 0; i < accounts.size(); i++) {
             System.out.println(accounts.get(i));
         }
+        return null;
     }
 
     @Override

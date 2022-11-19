@@ -52,6 +52,7 @@ public class IDK extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Back")) {
             Main.stopSound();
+            dispose();
             new Main();
         }
     }

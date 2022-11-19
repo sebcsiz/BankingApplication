@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // Prompts user to enter new account details, and creates a new account
@@ -21,7 +22,7 @@ public class CreateAccount extends JFrame implements ActionListener {
     private String password;
     private int bal;
     private static JsonWriter jsonWriter;
-    private static final String JSON_STORE = "./data/AccountList.json";
+    private static final String JSON_STORE = "data/AccountList.json";
 
     private JLabel userLabel = new JLabel("Name");
     private JTextField userText = new JTextField(15);
@@ -32,7 +33,8 @@ public class CreateAccount extends JFrame implements ActionListener {
     private JButton button = new JButton("Continue");
 
     // EFFECTS: Creates window and button. Calls createAccountTextFields()
-    public CreateAccount() {
+    public CreateAccount(AccountList accountList) throws IOException {
+        this.accountList = accountList;
         jsonWriter = new JsonWriter(JSON_STORE);
         try {
             setIconImage(ImageIO.read(new File("data/money.png")));
@@ -82,6 +84,17 @@ public class CreateAccount extends JFrame implements ActionListener {
         add(initialBalanceText);
     }
 
+    // EFFECTS: saves the AccountList to file
+    public void saveAccountList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(accountList);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     // REQUIRES: e
     // MODIFIES: name, password, balance, bankAccount, accountList. Adds new bankAccount and goes to account menu
     // EFFECTS:
@@ -92,8 +105,8 @@ public class CreateAccount extends JFrame implements ActionListener {
         bal = Integer.parseInt(initialBalanceText.getText());
         bankAccount = new BankAccount(name, password, bal);
         if (e.getActionCommand().equals("Continue")) {
-            accountList = Main.getAccountList();
             accountList.addBankAccount(bankAccount);
+            saveAccountList();
             dispose();
             new InAccount(bankAccount);
         }
