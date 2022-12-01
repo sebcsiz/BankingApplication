@@ -2,6 +2,7 @@ package ui;
 
 import model.AccountList;
 import model.BankAccount;
+import org.json.JSONArray;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -27,7 +28,7 @@ public class Bank {
 
     // EFFECTS: Constructs AccountList and executes bankConsole
     public Bank() throws IOException {
-        accountList = new AccountList("All Accounts");
+        accountList = new AccountList();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         bankConsole(); // When bank is called in main, it will run bankConsole();
@@ -253,7 +254,7 @@ public class Bank {
                 listAllAccounts();
                 bankConsole();
             } else if (userChoice.equalsIgnoreCase("B")) {
-                clearJson();
+//                clearJson();
                 System.out.println("JSON File has been cleared");
                 bankConsole();
             } else {
@@ -328,26 +329,24 @@ public class Bank {
 
     // MODIFIES: this
     // EFFECTS: loads AccountList from file
-    static void loadAccountList() throws IOException {
+    static void loadAccountList() {
         try {
             accountList = jsonReader.read();
             System.out.println("Loaded " + accountList.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-//        bankConsole();
     }
 
     // MODIFIES: JSON_STORE
     // EFFECTS: Removes all accounts from JSON_STORE
-    static void clearJson() throws IOException {
-        /* Method from https://stackoverflow.com/questions/60264708/java-removing-content-from-json-file */
-        Path path = Paths.get(JSON_STORE);
-        File file = new File(path.toString());
-        file.setWritable(true);
-        BufferedOutputStream bufferedOutputStream
-                = new BufferedOutputStream(new FileOutputStream(path.toString()));
-        bufferedOutputStream.write("{}".getBytes());
-        bufferedOutputStream.flush();
-    }
+//    static void clearJson() throws IOException {
+//        /* Method from https://stackoverflow.com/questions/60264708/java-removing-content-from-json-file */
+//        File file = new File(JSON_STORE);
+//        file.setWritable(true);
+//        BufferedOutputStream bufferedOutputStream
+//                = new BufferedOutputStream(new FileOutputStream(JSON_STORE));
+//        bufferedOutputStream.write("{}".getBytes());
+//        bufferedOutputStream.flush();
+//    }
 }

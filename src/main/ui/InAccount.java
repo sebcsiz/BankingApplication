@@ -147,7 +147,7 @@ public class InAccount extends JFrame implements ActionListener {
     // REQUIRES: accountList
     // MODIFIES: jsonWriter
     // EFFECTS: saves account to accountList
-    public void saveAccount(AccountList accountList) {
+    public static void saveAccount(AccountList accountList) {
         jsonWriter = new JsonWriter(JSON_STORE);
         try {
             jsonWriter.open();

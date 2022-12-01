@@ -1,6 +1,9 @@
 package ui;
 
 import model.AccountList;
+import model.BankAccount;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.actions.IDK;
@@ -10,8 +13,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
 
 // Main method that creates GUI and runs internal code
@@ -36,7 +38,7 @@ public class Main extends JFrame implements ActionListener {
     // EFFECTS: renames window and calls initializegraphics()
     public Main() {
         super("LeBank");
-        accountList = new AccountList("List of Accounts");
+        accountList = new AccountList();
         writer = new JsonWriter(JSON_STORE);
         reader = new JsonReader(JSON_STORE);
         initializeGraphics();
@@ -217,8 +219,12 @@ public class Main extends JFrame implements ActionListener {
         }
         if (e.getActionCommand().equals("Load Accounts")) {
             loadAccountListener();
+            BankAccount.logEvent("Loaded accounts");
         }
         if (e.getActionCommand().equals("Exit")) {
+            for (Event event : EventLog.getInstance()) {
+                System.out.println(event.toString());
+            }
             System.exit(0);
         }
 

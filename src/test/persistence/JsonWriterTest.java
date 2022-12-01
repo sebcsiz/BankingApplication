@@ -17,7 +17,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            AccountList al = new AccountList("My account list");
+            AccountList al = new AccountList();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -29,7 +29,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterEmptyWorkroom() {
         try {
-            AccountList al = new AccountList("My account list");
+            AccountList al = new AccountList();
             JsonWriter writer = new JsonWriter("./data/JsonTests/testWriterEmptyWorkroom.json");
             writer.open();
             writer.write(al);
@@ -45,9 +45,9 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testJsonWriter() throws FileNotFoundException {
+    void testJsonWriter() {
         try {
-            AccountList al = new AccountList("test list");
+            AccountList al = new AccountList();
             JsonWriter writer = new JsonWriter("./data/JsonTests/testJsonWriter.json");
             writer.open();
             writer.write(al);

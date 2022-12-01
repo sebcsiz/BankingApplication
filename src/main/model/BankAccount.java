@@ -25,12 +25,17 @@ public class BankAccount implements Writable {
         }
     }
 
+    public static void logEvent(String description) {
+        EventLog.getInstance().logEvent(new Event(description));
+    }
+
     public String getName() {
         return name; // returns name
     }
 
     public void setPassword(String password) {
         this.password = password;
+        logEvent("Changed password to: " + this.password);
     }
 
     public String getPassword() {
@@ -53,6 +58,7 @@ public class BankAccount implements Writable {
             System.out.println("Invalid amount");
         } else {
             balance += amount; // adds given amount from account
+            logEvent("Deposited $" + amount);
         }
 
         return balance; // returns new balance
@@ -70,6 +76,7 @@ public class BankAccount implements Writable {
             System.out.println("Invalid Amount");
         } else if (balance >= amount) { // checks if the balance has enough to be withdrawn from
             balance -= amount; // removes given amount from account
+            logEvent("Withdrew: $" + amount);
         }
 
         return balance; // returns new balance
@@ -89,5 +96,4 @@ public class BankAccount implements Writable {
         json.put("balance", balance);
         return json;
     }
-
 }

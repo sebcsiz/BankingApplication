@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static ui.InAccount.saveAccount;
+
 // Lets Admin view a list all accounts or Clears JSON files
 public class InAdmin extends JFrame implements ActionListener {
 
@@ -71,7 +73,7 @@ public class InAdmin extends JFrame implements ActionListener {
 
     // EFFECTS: creates clear json button
     public void createButton1() {
-        button1 = new JButton("Clear JSON");
+        button1 = new JButton("Clear Accounts");
         button1.setBounds(600,550,400,75);
         button1.setFont(new Font(Font.MONOSPACED, Font.BOLD,20));
         button1.setFocusable(false);
@@ -101,12 +103,10 @@ public class InAdmin extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
-        if (e.getActionCommand().equals("Clear JSON")) {
-            try {
-                Bank.clearJson();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+        if (e.getActionCommand().equals("Clear Accounts")) {
+            AccountList accList = new AccountList();
+            saveAccount(accList);
+            BankAccount.logEvent("Cleared all accounts");
         }
         if (e.getActionCommand().equals("Back to Menu")) {
             dispose();

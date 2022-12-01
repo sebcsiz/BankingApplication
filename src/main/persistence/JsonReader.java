@@ -42,7 +42,7 @@ public class JsonReader {
     // EFFECTS: parses AccountList from JSON object and returns it
     private AccountList parseAccountList(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        AccountList al = new AccountList(name);
+        AccountList al = new AccountList();
         addBankAccounts(al, jsonObject);
         return al;
     }

@@ -61,6 +61,7 @@ public class GambleFinal extends Action {
                 account.withdraw(amountEntered);
             }
             dispose();
+            BankAccount.logEvent(this.account.getName() + " gambled");
             new InAccount(this.account);
         }
     }

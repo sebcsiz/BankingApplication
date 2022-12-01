@@ -51,3 +51,6 @@ a 'P' on it.
 
 All JSON related code is from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo <br>
 GUI was made referencing: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete 
+
+### Phase 4: Task 2
+Event code is referenced from: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem

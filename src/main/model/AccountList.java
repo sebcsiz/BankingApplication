@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountList implements Writable {
-    private String name;
+    private String name = "List of Accounts";
     private static List<BankAccount> accounts;
 
     // EFFECTS: constructs new AccountList with name and empty list of BankAccounts
-    public AccountList(String name) {
-        this.name = name;
+    public AccountList() {
         accounts = new ArrayList<>();
     }
 
@@ -39,12 +38,14 @@ public class AccountList implements Writable {
     // EFFECTS: adds BankAccount to this AccountList
     public void addBankAccount(BankAccount bk) {
         accounts.add(bk);
+        EventLog.getInstance().logEvent(new Event("Added Bank account " + bk + " to Account list"));
     }
 
     // MODIFIES: this
     // EFFECTS: removes BankAccount from this AccountList
     public void removeBankAccount(BankAccount bk) {
         accounts.remove(bk);
+        EventLog.getInstance().logEvent(new Event("Removed Bank account " + bk + " from Account list"));
     }
 
     // EFFECTS: checks if BankAccount is in AccountList
@@ -55,7 +56,7 @@ public class AccountList implements Writable {
         return false;
     }
 
-    // EFFECTS: returns size of accounts
+    // EFFECTS: returns size osf accounts
     public int size() {
         return accounts.size();
     }

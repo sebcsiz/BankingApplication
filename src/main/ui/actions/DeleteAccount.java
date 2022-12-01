@@ -8,7 +8,6 @@ import ui.Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 // Allows user to delete their current account
 public class DeleteAccount extends Action {
@@ -55,12 +54,8 @@ public class DeleteAccount extends Action {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Yes")) {
-            try {
-                Main.loadAccountList();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
             accountList.removeBankAccount(this.account);
+            BankAccount.logEvent("Removed account " + this.account.getName());
             dispose();
             new Main();
         }
