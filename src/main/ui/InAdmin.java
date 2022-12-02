@@ -104,9 +104,7 @@ public class InAdmin extends JFrame implements ActionListener {
             }
         }
         if (e.getActionCommand().equals("Clear Accounts")) {
-            AccountList accList = new AccountList();
-            saveAccount(accList);
-            BankAccount.logEvent("Cleared all accounts");
+            AccountList.clearAccounts();
         }
         if (e.getActionCommand().equals("Back to Menu")) {
             dispose();

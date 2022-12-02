@@ -55,7 +55,6 @@ public class DeleteAccount extends Action {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Yes")) {
             accountList.removeBankAccount(this.account);
-            BankAccount.logEvent("Removed account " + this.account.getName());
             dispose();
             new Main();
         }

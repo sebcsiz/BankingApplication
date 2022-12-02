@@ -1,8 +1,4 @@
 {
     "name": "List of Accounts",
-    "accounts": [{
-        "password": "pass",
-        "balance": 485,
-        "name": "huh"
-    }]
+    "accounts": []
 }

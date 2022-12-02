@@ -1,7 +1,6 @@
 package ui;
 
 import model.AccountList;
-import model.BankAccount;
 import model.Event;
 import model.EventLog;
 import persistence.JsonReader;
@@ -35,7 +34,7 @@ public class Main extends JFrame implements ActionListener {
     private JLabel label;
 
     // MODIFIES: accountList, writer, reader
-    // EFFECTS: renames window and calls initializegraphics()
+    // EFFECTS: renames window and calls initializeGraphics()
     public Main() {
         super("LeBank");
         accountList = new AccountList();
@@ -219,7 +218,6 @@ public class Main extends JFrame implements ActionListener {
         }
         if (e.getActionCommand().equals("Load Accounts")) {
             loadAccountListener();
-            BankAccount.logEvent("Loaded accounts");
         }
         if (e.getActionCommand().equals("Exit")) {
             for (Event event : EventLog.getInstance()) {

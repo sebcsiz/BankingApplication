@@ -108,7 +108,6 @@ public class CreateAccount extends JFrame implements ActionListener {
             accountList.addBankAccount(bankAccount);
             saveAccountList();
             dispose();
-            BankAccount.logEvent("Created account " + name);
             new InAccount(bankAccount);
         }
     }

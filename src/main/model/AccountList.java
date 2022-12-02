@@ -8,6 +8,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ui.InAccount.saveAccount;
+
 public class AccountList implements Writable {
     private String name = "List of Accounts";
     private static List<BankAccount> accounts;
@@ -25,27 +27,20 @@ public class AccountList implements Writable {
         return accounts;
     }
 
-    public BankAccount getAccounts(int index) {
-        for (int i = 0; i < accounts.size(); i++) {
-            if (i == index) {
-                return accounts.get(i);
-            }
-        }
-        return null;
-    }
-
     // MODIFIES: this
     // EFFECTS: adds BankAccount to this AccountList
     public void addBankAccount(BankAccount bk) {
         accounts.add(bk);
-        EventLog.getInstance().logEvent(new Event("Added Bank account " + bk + " to Account list"));
+        EventLog.getInstance().logEvent(new Event("Added Bank Account: " + bk.getName()
+                + " to the Account list"));
     }
 
     // MODIFIES: this
     // EFFECTS: removes BankAccount from this AccountList
     public void removeBankAccount(BankAccount bk) {
         accounts.remove(bk);
-        EventLog.getInstance().logEvent(new Event("Removed Bank account " + bk + " from Account list"));
+        EventLog.getInstance().logEvent(new Event("Removed Bank account: "
+                + bk.getName() + " from the Account list"));
     }
 
     // EFFECTS: checks if BankAccount is in AccountList
@@ -67,6 +62,12 @@ public class AccountList implements Writable {
             System.out.println(accounts.get(i));
         }
         return null;
+    }
+
+    public static void clearAccounts() {
+        AccountList accList = new AccountList();
+        saveAccount(accList);
+        BankAccount.logEvent("Cleared all accounts");
     }
 
     @Override
