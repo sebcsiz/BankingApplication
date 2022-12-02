@@ -79,3 +79,15 @@ Thu Dec 01 15:40:39 PST 2022 <br>
 Added Bank account test2 to Account list <br>
 Thu Dec 01 15:40:43 PST 2022 <br>
 Cleared all accounts
+
+### Phase 4: Task 3
+I think I did alright on my UML diagram. I was unable to find any design where no lines would cross,
+so I went with the design that had minimum amount of crosses. It is a little crammed, but It is the 
+best I could do with all of my classes. 
+
+If I had more time to work on this project, I think I would try and implement the ability to log back 
+into an account that was already created and saved, so a user could create an account, log out and exit 
+the application, re-open the application, then be able to log back into their previous made account and 
+deposit or withdraw some money etc. Refactor-wise, I would like to not have a separate class for each option
+the user can choose. I only did it because of how I made my UI design because I liked it opening a new 
+window on a button press. If it was not for that, I would definitely try and condense a bit.

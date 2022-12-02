@@ -19,8 +19,6 @@ import static ui.InAccount.saveAccount;
 // Lets Admin view a list all accounts or Clears JSON files
 public class InAdmin extends JFrame implements ActionListener {
 
-    private BankAccount[] info = new BankAccount[10];
-    private AccountList accountList = Main.getAccountList();
     private static JsonReader jsonReader;
     private static final String JSON_STORE = "./data/AccountList.json";
 

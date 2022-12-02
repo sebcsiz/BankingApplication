@@ -18,7 +18,6 @@ import java.io.IOException;
 public class PrintAccounts extends JFrame implements ActionListener {
 
     private AccountList accountList;
-    private BankAccount[] info = new BankAccount[10];
     private static JsonReader jsonReader;
     private static final String JSON_STORE = "data/AccountList.json";
 

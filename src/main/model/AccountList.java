@@ -14,7 +14,7 @@ public class AccountList implements Writable {
     private String name = "List of Accounts";
     private static List<BankAccount> accounts;
 
-    // EFFECTS: constructs new AccountList with name and empty list of BankAccounts
+    // EFFECTS: constructs .new AccountList with name and empty list of BankAccounts
     public AccountList() {
         accounts = new ArrayList<>();
     }
