@@ -8,16 +8,7 @@ and is reasonably in scope for difficulty and time for CPSC 210). Not too sure o
 I ever decide to open a bank, I could use this application as a starting basis. The reason of why I am 
 choosing to make a banking application is mainly because I couldn't think of anything cooler to do and I am
 running out of time to choose something for the project, but also because when I started coding, I tried to 
-make the same thing, but failed miserably because I didn't understand basic coding concepts O_o. In also want to
-try and implement some real-life algorithms myself (such as ***Luhns Algorithm***)
-
-## Possible additions:
-- Credit score system based off of income and timely payments
-- Ability to open up credit accounts => Would implement Luhns Algorithm as validity checker
-- Ability to open up mortgage based on credit score
-- Move money between accounts
-- Mini stock market. Stock prices would go up or down based on randomness (I feel like this might be too ambitious)
- 
+make the same thing, but failed miserably because I didn't understand basic coding concepts O_o.
 
 ## User Stories
 As a user, I want to be able to be able to create multiple bank accounts
